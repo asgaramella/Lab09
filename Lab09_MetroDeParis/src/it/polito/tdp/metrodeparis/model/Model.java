@@ -8,6 +8,7 @@ import org.jgrapht.Graphs;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.jgrapht.graph.WeightedMultigraph;
 
 import com.javadocmd.simplelatlng.LatLng;
@@ -42,7 +43,7 @@ private DijkstraShortestPath<Fermata,DefaultWeightedEdge> dijkstra;
 	
 	public void creaGrafo(){
 	
-			this.graph=new WeightedMultigraph<Fermata,DefaultWeightedEdge>(DefaultWeightedEdge.class);
+			this.graph=new DirectedWeightedMultigraph<Fermata,DefaultWeightedEdge>(DefaultWeightedEdge.class);
 			MetroDAO dao=new MetroDAO();
 			//popola mappa linee
 			linee=dao.getAllLinee();
@@ -60,7 +61,7 @@ private DijkstraShortestPath<Fermata,DefaultWeightedEdge> dijkstra;
 				DefaultWeightedEdge e = graph.addEdge(stazA,stazP);
 				graph.setEdgeWeight(e, peso);
 				
-				//jvbjv
+				
 			}
 			
 	}

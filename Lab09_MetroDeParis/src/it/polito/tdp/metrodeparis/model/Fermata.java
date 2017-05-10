@@ -9,11 +9,12 @@ public class Fermata {
 	private LatLng coords;
 
 	public Fermata(int idFermata, String nome, LatLng coords) {
+		super();
 		this.idFermata = idFermata;
 		this.nome = nome;
 		this.coords = coords;
 	}
-	
+
 	public Fermata(int idFermata) {
 		this.idFermata = idFermata;
 	}
@@ -42,9 +43,16 @@ public class Fermata {
 		this.coords = coords;
 	}
 
+	
+
+	
+
 	@Override
 	public int hashCode() {
-		return ((Integer) idFermata).hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idFermata;
+		return result;
 	}
 
 	@Override
@@ -60,7 +68,7 @@ public class Fermata {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return nome;
