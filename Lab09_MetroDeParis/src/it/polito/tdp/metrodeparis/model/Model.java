@@ -60,7 +60,7 @@ private DijkstraShortestPath<Fermata,DefaultWeightedEdge> dijkstra;
 				DefaultWeightedEdge e = graph.addEdge(stazA,stazP);
 				graph.setEdgeWeight(e, peso);
 				
-				
+				//jvbjv
 			}
 			
 	}
