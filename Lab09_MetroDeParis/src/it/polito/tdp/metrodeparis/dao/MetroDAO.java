@@ -57,7 +57,7 @@ public class MetroDAO {
 		return fermate;
 	}
 
-	public List<FermataConLinea> getAllFermateconLinee() {
+	public List<FermataConLinea> getAllFermateconLinee(List<Fermata> ferm) {
 
 		final String sql = "SELECT DISTINCT fermata.id_fermata, fermata.nome, fermata.coordX, fermata.coordY, connessione.id_linea "+
 							"FROM fermata, connessione "+
@@ -74,6 +74,12 @@ public class MetroDAO {
 				fermate.add(f);
 				String key=Integer.toString(f.getIdFermata())+ Integer.toString(f.getIdLinea());
 				mappaFermatine.put(key, f);
+				
+				//per aggiungere rif della figlia nel padre 
+				//creo un nuovo oggetto fermata per trovarlo nella lista delle fermate che ho già
+				//con il get usato su una lista prendo l'oggetto in pos restituita da index of che tutavia resituisce il primo incontrato quindi quello già esistente
+				Fermata myferm=ferm.get(ferm.indexOf(new Fermata(rs.getInt("id_Fermata"))));
+				myferm.setFigliaIn(f);
 			}
 
 			st.close();

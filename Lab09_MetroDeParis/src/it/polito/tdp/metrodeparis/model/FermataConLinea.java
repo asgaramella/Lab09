@@ -34,7 +34,7 @@ public class FermataConLinea extends Fermata {
 	}
 
 	
-	
+	//equals e hascode classe figlia ereditano qll di classe padre+ puoi aggiungere altri elem
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

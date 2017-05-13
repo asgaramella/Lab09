@@ -43,10 +43,10 @@ public class MetroDeParisController {
     	
     			double tempo=model.pesoCamminoMinimo(partenza, destinazione)/60;
     	
-    			txtResult.appendText(model.camminoMinimo(partenza, destinazione));
+    			txtResult.appendText(model.camminoMinimo());
     	
     	
-    			txtResult.appendText("Tempo di percorrenza stimato in minuti: "+Double.toString(tempo) );
+    			txtResult.appendText("Tempo di percorrenza stimato in minuti: "+Double.toString(tempo)+"\n" );
     			}
     		else
     			txtResult.appendText("Inserire stazione di partenza diversa da quella di destinazione!");

@@ -45,7 +45,7 @@ private FermataConLinea d=null;
 	public List<FermataConLinea> getFermateConLinea(){
 		if(fermatine==null){
 			MetroDAO dao=new MetroDAO();
-			fermatine=dao.getAllFermateconLinee();
+			fermatine=dao.getAllFermateconLinee(fermate);
 			mappaFermatine=dao.getMappaFermatine();
 
 		}
@@ -53,7 +53,7 @@ private FermataConLinea d=null;
 	}
 	
 	
-	
+
 	
 	public void creaGrafo(){
 	
@@ -61,6 +61,7 @@ private FermataConLinea d=null;
 			MetroDAO dao=new MetroDAO();
 			//popola mappa linee
 			linee=dao.getAllLinee();
+		
 			
 			Graphs.addAllVertices(graph, this.getFermateConLinea());
 			
@@ -80,26 +81,22 @@ private FermataConLinea d=null;
 				graph.setEdgeWeight(e2, peso);
 			}
 			
+				//aggiungo collegamenti tra la stessa stazione su linee diverse 
 				for(Fermata f: fermate){
-					List<FermataConLinea> figlie=new ArrayList<FermataConLinea>();
-					for(FermataConLinea fcn: fermatine){
-						if(f.getIdFermata()==fcn.getIdFermata()){
-							figlie.add(fcn);
-							f.setFigliaIn(fcn);
+					for(FermataConLinea fclP: f.getFiglie()){
+						for(FermataConLinea fclA: f.getFiglie()){
+							if(!fclP.equals(fclA)){
+								DefaultWeightedEdge a = graph.addEdge(fclP,fclA);
+								graph.setEdgeWeight(a, (linee.get(fclA.getIdLinea()).getIntervallo())/60);
 							}
+								
+						}
 						
 					}
-					if(figlie.size()>1){
-						for(int i=0;i<figlie.size()-1;i++){
-							DefaultWeightedEdge a = graph.addEdge(figlie.get(i),figlie.get(i+1));
-							DefaultWeightedEdge a2 = graph.addEdge(figlie.get(i+1),figlie.get(i));
-							graph.setEdgeWeight(a, linee.get(figlie.get(i).getIdLinea()).getIntervallo());
-							graph.setEdgeWeight(a2, linee.get(figlie.get(i+1).getIdLinea()).getIntervallo());
+							
 						}
 					}
-				}
-				
-			}
+			
 			
 	
 	
@@ -111,7 +108,7 @@ private FermataConLinea d=null;
 			for(FermataConLinea fclD:destinazione.getFiglie()){
 				dijkstra=new DijkstraShortestPath<FermataConLinea,DefaultWeightedEdge>(graph, fclP, fclD);
 				if(dijkstra.getPathLength()*3600+(dijkstra.getPathEdgeList().size())*30<peso){
-					peso=dijkstra.getPathLength()*3600+(dijkstra.getPathEdgeList().size())*30;
+					peso=dijkstra.getPathLength()*3600+(dijkstra.getPathEdgeList().size()-1)*30;
 					this.p=fclP;
 					this.d=fclD;
 				}
@@ -123,7 +120,7 @@ private FermataConLinea d=null;
 		return peso;
 	}
 	
-	public String camminoMinimo(Fermata partenza, Fermata destinazione){
+	public String camminoMinimo(){
 		dijkstra=new DijkstraShortestPath<FermataConLinea,DefaultWeightedEdge>(graph, p, d);
 		 String stemp="Prendo Linea "+linee.get(p.getIdLinea()).getNome()+"\n"+ p.toString()+"\n";
 		
