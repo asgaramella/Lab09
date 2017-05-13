@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="it.polito.tdp.metrodeparis.MetroDeParisController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.metrodeparis.MetroDeParisController">
    <top>
       <Label text="Lab8_MetroParis" BorderPane.alignment="CENTER" />
    </top>
@@ -23,7 +22,7 @@
                <children>
                   <ImageView fitHeight="129.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../../Desktop/anto/RATP_Group_logo.svg.png" />
+                        <Image url="@../../../../../../../../Desktop/POLI/Terzo%20anno/TdP/logo-ratp.jpg" />
                      </image>
                   </ImageView>
                   <VBox>

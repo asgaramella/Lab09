@@ -4,11 +4,53 @@ import com.javadocmd.simplelatlng.LatLng;
 
 public class FermataConLinea extends Fermata {
 	private int idLinea;
-
-	public FermataConLinea(int idFermata, String nome, LatLng coords) {
+	
+	public FermataConLinea(int idFermata, String nome, LatLng coords, int idLinea) {
 		super(idFermata, nome, coords);
-		// TODO Auto-generated constructor stub
+		this.idLinea=idLinea;
 	}
+
+	/**
+	 * @return the idLinea
+	 */
+	public int getIdLinea() {
+		return idLinea;
+	}
+
+	/**
+	 * @param idLinea the idLinea to set
+	 */
+	public void setIdLinea(int idLinea) {
+		this.idLinea = idLinea;
+	}
+
+	
+	
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + idLinea;
+		return result;
+	}
+
+	
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FermataConLinea other = (FermataConLinea) obj;
+		if (idLinea != other.idLinea)
+			return false;
+		return true;
+	}
+
+	
+
+	
 
 	
 

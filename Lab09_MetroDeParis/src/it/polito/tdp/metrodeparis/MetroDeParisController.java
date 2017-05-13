@@ -37,15 +37,22 @@ public class MetroDeParisController {
     void doCalcolaPercorso(ActionEvent event) {
     	Fermata partenza=comboPartenza.getValue();
     	Fermata destinazione=comboArrivo.getValue();
+    	if(partenza!=null && destinazione!=null){
+    		if(!partenza.equals(destinazione)){
+    			model.creaGrafo();
     	
-    	model.creaGrafo();
+    			double tempo=model.pesoCamminoMinimo(partenza, destinazione)/60;
     	
-    	for(Fermata ftemp:model.camminoMinimo(partenza, destinazione)){
-    		txtResult.appendText(ftemp.toString()+"\n");
+    			txtResult.appendText(model.camminoMinimo(partenza, destinazione));
+    	
+    	
+    			txtResult.appendText("Tempo di percorrenza stimato in minuti: "+Double.toString(tempo) );
+    			}
+    		else
+    			txtResult.appendText("Inserire stazione di partenza diversa da quella di destinazione!");
     	}
-    	
-    	double tempo=model.pesoCamminoMinimo(partenza, destinazione)/60;
-    	txtResult.appendText("Tempo di percorrenza stimato in minuti: "+Double.toString(tempo) );
+    	else
+    		txtResult.appendText("Inserire una stazione di partenza e di destinazione! ");
     	
     }
 
